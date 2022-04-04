@@ -7,18 +7,21 @@ use Illuminate\Support\Facades\Http;
 
 class WrapperController extends Controller
 {
-    public function contents(){
-        $json = Http::get('https://ap.api.riotgames.com/val/content/v1/contents?api_key=RGAPI-f8f79a77-7987-4114-ac94-2c182325e61b')->json();
+    public function contents(Request $request){
+        $key = $request->api_key;
+        $json = Http::get('https://ap.api.riotgames.com/val/content/v1/contents?api_key='.$key)->json();
         return response()->json($json);
     }
 
-    public function leaderboardsByActId($actid){
-        $json = Http::get('https://ap.api.riotgames.com/val/ranked/v1/leaderboards/by-act/'.$actid.'?size=200&startIndex=0&api_key=RGAPI-f8f79a77-7987-4114-ac94-2c182325e61b')->json();
+    public function leaderboardsByActId($actid, Request $request){
+        $key = $request->api_key;
+        $json = Http::get('https://ap.api.riotgames.com/val/ranked/v1/leaderboards/by-act/'.$actid.'?size=200&startIndex=0&api_key='.$key)->json();
         return response()->json($json);
     }
 
-    public function platformdata(){
-        $json = Http::get('https://ap.api.riotgames.com/val/status/v1/platform-data?api_key=RGAPI-f8f79a77-7987-4114-ac94-2c182325e61b')->json();
+    public function platformdata(Request $request){
+        $key = $request->api_key;
+        $json = Http::get('https://ap.api.riotgames.com/val/status/v1/platform-data?api_key='.$key)->json();
         return response()->json($json);
     }
 
